@@ -3,6 +3,24 @@ import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { Button } from 'react-native-elements';
 
 export default class Home extends React.Component {
+  constructor() {
+    super();
+    this.checkIn = this.checkIn.bind(this);
+    this.checkOut = this.checkOut.bind(this);
+  }
+
+  checkIn() {
+    console.log('here');
+    console.log(this.props.navigation.navigate(''));
+    this.props.navigation.navigate('CheckIn');
+  }
+
+  checkOut() {
+    console.log('here');
+    console.log(this.props.navigation.navigate(''));
+    this.props.navigation.navigate('CheckOut');
+  }
+
   render() {
     return (
       <View style={styles.column}>
@@ -12,11 +30,15 @@ export default class Home extends React.Component {
           <View style={{ width: 50, height: 50, backgroundColor: 'steelblue' }} />
         </View>
         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
-          <TouchableHighlight style={styles.checkInBtn}>
-            <View style={{ width: 200, height: 200, margin: 100, backgroundColor: '#8BC34A' }} />
+          <TouchableHighlight onPress={this.checkIn} style={styles.checkInBtn}>
+            <View style={{ width: 200, height: 200, margin: 100 }}>
+              <Text style={styles.submitText}>Check In</Text>
+            </View>
           </TouchableHighlight>
-          <TouchableHighlight style={styles.checkOutBtn} onPress={() => console.log('pressed')}>
-            <View style={{ width: 200, height: 200, margin: 100, backgroundColor: '#C34A4E' }} />
+          <TouchableHighlight style={styles.checkOutBtn} onPress={this.checkOut}>
+            <View style={{ width: 200, height: 200, margin: 100 }}>
+              <Text style={styles.submitText}>Check Out</Text>
+            </View>
           </TouchableHighlight>
         </View>
         <View style={{ flex: 1, flexDirection: 'row' }}>
@@ -45,6 +67,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#fff',
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowRadius: 5,
+    shadowOpacity: 1.0,
   },
   checkOutBtn: {
     marginRight: 40,
@@ -56,6 +85,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#fff',
+    shadowColor: '#000000',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowRadius: 5,
+    shadowOpacity: 1.0,
+  },
+  submitText: {
+    fontSize: 40,
+    color: '#fff',
+    textAlign: 'center',
   },
   container: {
     flex: 1,

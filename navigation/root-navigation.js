@@ -3,10 +3,19 @@ import React from 'react';
 import StatusBar from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Home from '../screens/home-screen.js';
+import CheckIn from '../screens/guest-check-in-out.js';
+import CheckOut from '../screens/guest-check-out.js';
+
 const RootStackNavigator = StackNavigator(
   {
     Main: {
       screen: Home,
+    },
+    CheckIn: {
+      screen: CheckIn,
+    },
+    CheckOut: {
+      screen: CheckOut,
     },
   },
   {
