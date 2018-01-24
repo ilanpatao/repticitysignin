@@ -38,10 +38,14 @@ export default class Numpad extends React.Component {
       <View>
         {rows.map((row, i) => (
           <ButtonGroup
+            buttonStyle={styles.buttonStyle}
+            textStyle={styles.textStyle}
             key={i}
             onPress={num => this.handlePress(rows[i][num])}
             buttons={row}
-            containerStyle={{ height: 100, width: 500 }}
+            containerStyle={{ height: 100, width: 500, backgroundColor: '#e9e9e9' }}
+            innerBorderStyle={{ color: '#e9e9e9', width: 5 }}
+            underlayColor="#e9e9e9"
           />
         ))}
       </View>
@@ -56,8 +60,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  buttonstyle: {
-    marginRight: 5,
-    marginLeft: 5,
+  buttonStyle: {
+    backgroundColor: '#fff',
+  },
+  textStyle: {
+    color: '#4A8AC3',
+    fontSize: 30,
   },
 });

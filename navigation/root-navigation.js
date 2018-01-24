@@ -22,6 +22,7 @@ const RootStackNavigator = StackNavigator(
     navigationOptions: () => ({
       headerStyle: {
         height: 5,
+        backgroundColor: '#e9e9e9',
       },
       statusBarStyle: 'light-content',
     }),

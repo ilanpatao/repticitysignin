@@ -51,7 +51,7 @@ export default class CheckIn extends React.Component {
             .slice(3, 6)
             .join('')}-${this.state.numberArray.slice(6, 10).join('')}`;
     return (
-      <View>
+      <View style={styles.container}>
         <Header
           outerContainerStyles={{ height: 300 }}
           backgroundColor="#e9e9e9"
@@ -71,9 +71,6 @@ export default class CheckIn extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#e9e9e9',
   },
 });
