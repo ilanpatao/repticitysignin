@@ -10,10 +10,21 @@ export default class Numpad extends React.Component {
       selectedIndex: 2,
     };
     this.updateIndex = this.updateIndex.bind(this);
+    this.handlePress = this.handlePress.bind(this);
   }
 
   updateIndex(selectedIndex) {
     this.setState({ selectedIndex });
+  }
+
+  handlePress(key) {
+    if (key === 'Delete') {
+      this.props.deleteNum();
+    } else if (key === 'Clear') {
+      this.props.clear();
+    } else {
+      this.props.numberPress(key);
+    }
   }
 
   render() {
@@ -28,8 +39,7 @@ export default class Numpad extends React.Component {
         {rows.map((row, i) => (
           <ButtonGroup
             key={i}
-            disableSelected
-            onPress={this.updateIndex}
+            onPress={num => this.handlePress(rows[i][num])}
             buttons={row}
             containerStyle={{ height: 100, width: 500 }}
           />
@@ -45,5 +55,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  buttonstyle: {
+    marginRight: 5,
+    marginLeft: 5,
   },
 });
