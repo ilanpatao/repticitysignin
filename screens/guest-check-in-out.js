@@ -9,23 +9,47 @@ export default class CheckIn extends React.Component {
     super();
     this.state = {
       number: '',
+      index: 0,
+      numberArray: ['_', '_', '_', '_', '_', '_', '_', '_', '_', '_'],
     };
+
     this.deleteNum = this.deleteNum.bind(this);
     this.clear = this.clear.bind(this);
     this.numberPress = this.numberPress.bind(this);
   }
-
+  componentDidMount() {
+    this.setState({
+      number: `(${this.state.numberArray.slice(0, 3)}) ${this.state.numberArray.slice(
+        3,
+        6
+      )}-${this.state.numberArray.slice(6, 10)}`,
+    });
+  }
   deleteNum() {
-    this.setState({ number: this.state.number.slice(0, this.state.number.length - 1) });
+    let temp = this.state.numberArray;
+    temp[this.state.index - 1] = '_';
+    this.setState({ numberArray: temp }, () => {
+      if (this.state.index > 0) this.setState({ index: this.state.index - 1 });
+    });
   }
   clear() {
-    this.setState({ number: '' });
+    this.setState({ numberArray: ['_', '_', '_', '_', '_', '_', '_', '_', '_', '_'] });
   }
   numberPress(number) {
-    this.setState({ number: this.state.number + number });
+    let temp = this.state.numberArray;
+    temp[this.state.index] = number;
+    this.setState({ numberArray: temp }, () => {
+      if (this.state.index < 10) this.setState({ index: this.state.index + 1 });
+    });
   }
 
   render() {
+    let number =
+      this.state.numberArray[0] === '_'
+        ? ''
+        : `(${this.state.numberArray.slice(0, 3).join('')}) ${this.state.numberArray
+            .slice(3, 6)
+            .join('')}-${this.state.numberArray.slice(6, 10).join('')}`;
     return (
       <View>
         <Header
@@ -36,7 +60,7 @@ export default class CheckIn extends React.Component {
         <FormLabel>Number</FormLabel>
         <FormInput
           keyboardType="number-pad"
-          value={this.state.number}
+          value={number}
           onChangeText={number => this.setState({ number })}
         />
         <Numpad clear={this.clear} deleteNum={this.deleteNum} numberPress={this.numberPress} />
