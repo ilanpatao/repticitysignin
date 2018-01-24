@@ -17,7 +17,7 @@ export default class Numpad extends React.Component {
   }
 
   render() {
-    const row1 = ['1', '2', '3'];
+    const rows = [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9'], ['Clear', '0', 'Delete']];
     const row2 = ['4', '5', '6'];
     const row3 = ['7', '8', '9'];
     const row4 = ['Clear', '0', 'Delete'];
@@ -25,27 +25,15 @@ export default class Numpad extends React.Component {
 
     return (
       <View>
-        <ButtonGroup
-          disableSelected
-          onPress={this.updateIndex}
-          buttons={row1}
-          containerStyle={{ height: 100, width: 500 }}
-        />
-        <ButtonGroup
-          onPress={this.updateIndex}
-          buttons={row2}
-          containerStyle={{ height: 100, width: 500 }}
-        />
-        <ButtonGroup
-          onPress={this.updateIndex}
-          buttons={row3}
-          containerStyle={{ height: 100, width: 500 }}
-        />
-        <ButtonGroup
-          onPress={this.updateIndex}
-          buttons={row4}
-          containerStyle={{ height: 100, width: 500 }}
-        />
+        {rows.map((row, i) => (
+          <ButtonGroup
+            key={i}
+            disableSelected
+            onPress={this.updateIndex}
+            buttons={row}
+            containerStyle={{ height: 100, width: 500 }}
+          />
+        ))}
       </View>
     );
   }
