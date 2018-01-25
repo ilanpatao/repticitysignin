@@ -5,7 +5,7 @@ import { StackNavigator } from 'react-navigation';
 import Home from '../screens/home-screen.js';
 import CheckIn from '../screens/guest-check-in-out.js';
 import CheckOut from '../screens/guest-check-out.js';
-
+import Name from '../screens/name.js';
 const RootStackNavigator = StackNavigator(
   {
     Main: {
@@ -16,6 +16,9 @@ const RootStackNavigator = StackNavigator(
     },
     CheckOut: {
       screen: CheckOut,
+    },
+    Name: {
+      screen: Name,
     },
   },
   {

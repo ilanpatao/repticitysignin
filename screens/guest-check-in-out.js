@@ -32,8 +32,15 @@ export default class CheckIn extends React.Component {
     let temp = this.state.numberArray;
     temp[this.state.index] = number;
     this.setState({ numberArray: temp }, () => {
-      if (this.state.index < 10) this.setState({ index: this.state.index + 1 });
+      if (this.state.index < 10)
+        this.setState({ index: this.state.index + 1 }, () => {
+          if (this.state.index === 10) this.goToName();
+        });
     });
+  }
+
+  goToName() {
+    this.props.navigation.navigate('Name', { number: this.state.numberArray });
   }
 
   render() {
