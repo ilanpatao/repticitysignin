@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { Constants, Location, Permissions } from 'expo';
 import { Header, FormLabel, FormInput, ButtonGroup } from 'react-native-elements';
 import Numpad from '../components/numpad.js';
+import GuestCheckInfo from '../components/check-in-info.js';
 
 export default class CheckIn extends React.Component {
   constructor() {
@@ -52,9 +53,14 @@ export default class CheckIn extends React.Component {
             style: { color: '#7F7F7F', fontSize: 100, fontWeight: '300' },
           }}
         />
-        <View style={styles.numberContainer}>
-          <Text style={styles.numberText}>{number}</Text>
-          <Numpad clear={this.clear} deleteNum={this.deleteNum} numberPress={this.numberPress} />
+        <View style={styles.bodyContainer}>
+          <View style={styles.numberContainer}>
+            <Text style={styles.numberText}>{number}</Text>
+            <Numpad clear={this.clear} deleteNum={this.deleteNum} numberPress={this.numberPress} />
+          </View>
+          <View style={styles.numberContainer}>
+            <GuestCheckInfo />
+          </View>
         </View>
       </View>
     );
@@ -67,10 +73,15 @@ const styles = StyleSheet.create({
   },
   numberContainer: {
     flex: 1,
-    paddingTop: 100,
+
     width: '50%',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  bodyContainer: {
+    flex: 1,
+    paddingTop: 100,
+    flexDirection: 'row',
   },
   numberText: {
     color: '#4A8AC3',

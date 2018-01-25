@@ -3,16 +3,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Constants } from 'expo';
 import { Icon } from 'react-native-elements';
 
-export default class example extends React.Component {
+export default class CheckInInfo extends React.Component {
   render() {
     return (
       <View>
-        <View style={styles.infoContainer}>
-          <Icon name="info" type="Foundation" color="#4DC34A" />
-        </View>
-        <View style={styles.infoContainer}>
-          <Icon name="info" type="Foundation" color="#4A8AC3" />
-        </View>
+        <Icon name="info" type="Foundation" color="#4DC34A" />
+        <Text>First Time Guests</Text>
       </View>
     );
   }
@@ -21,9 +17,7 @@ export default class example extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
-  infoContainer: { flexGrow: 1, justifyContent: 'center', alignItems: 'center' },
 });
