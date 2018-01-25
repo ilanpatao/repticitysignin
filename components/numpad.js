@@ -43,7 +43,7 @@ export default class Numpad extends React.Component {
             key={i}
             onPress={num => this.handlePress(rows[i][num])}
             buttons={row}
-            containerStyle={{ height: 100, width: 500, backgroundColor: '#e9e9e9' }}
+            containerStyle={{ height: 100, width: 400, backgroundColor: '#e9e9e9' }}
             innerBorderStyle={{ color: '#e9e9e9', width: 5 }}
             underlayColor="#e9e9e9"
           />

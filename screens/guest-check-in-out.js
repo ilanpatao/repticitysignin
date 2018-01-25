@@ -17,14 +17,6 @@ export default class CheckIn extends React.Component {
     this.clear = this.clear.bind(this);
     this.numberPress = this.numberPress.bind(this);
   }
-  componentDidMount() {
-    this.setState({
-      number: `(${this.state.numberArray.slice(0, 3)}) ${this.state.numberArray.slice(
-        3,
-        6
-      )}-${this.state.numberArray.slice(6, 10)}`,
-    });
-  }
   deleteNum() {
     let temp = this.state.numberArray;
     temp[this.state.index - 1] = '_';
@@ -53,17 +45,17 @@ export default class CheckIn extends React.Component {
     return (
       <View style={styles.container}>
         <Header
-          outerContainerStyles={{ height: 300 }}
+          outerContainerStyles={{ height: 300, borderBottomWidth: 0 }}
           backgroundColor="#e9e9e9"
-          centerComponent={{ text: 'Guest Check-In', style: { color: '#000', fontSize: 100 } }}
+          centerComponent={{
+            text: 'Guest Check-In',
+            style: { color: '#7F7F7F', fontSize: 100, fontWeight: '300' },
+          }}
         />
-        <FormLabel>Number</FormLabel>
-        <FormInput
-          keyboardType="number-pad"
-          value={number}
-          onChangeText={number => this.setState({ number })}
-        />
-        <Numpad clear={this.clear} deleteNum={this.deleteNum} numberPress={this.numberPress} />
+        <View style={styles.numberContainer}>
+          <Text style={styles.numberText}>{number}</Text>
+          <Numpad clear={this.clear} deleteNum={this.deleteNum} numberPress={this.numberPress} />
+        </View>
       </View>
     );
   }
@@ -72,5 +64,17 @@ export default class CheckIn extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#e9e9e9',
+  },
+  numberContainer: {
+    flex: 1,
+    paddingTop: 100,
+    width: '50%',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  numberText: {
+    color: '#4A8AC3',
+    fontSize: 50,
+    textAlign: 'center',
   },
 });
