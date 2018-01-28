@@ -29,6 +29,7 @@ export default class Name extends React.Component {
           <FormInput
             onChange={lastName => this.setState({ lastName })}
             ref={ref => (this.lastName = ref)}
+            onSubmitEditing={() => this.props.navigation.navigate('Camera')}
           />
         </View>
       </View>
