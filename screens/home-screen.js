@@ -1,6 +1,55 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, Image, Picker } from 'react-native';
 import { Button } from 'react-native-elements';
+import moment from 'moment';
+const rehabLogo = require('../assets/images/rehablogo.png');
+const logo = require('../assets/images/logo.png');
+import { Dropdown } from 'react-native-material-dropdown';
+
+const languages = [
+  {
+    value: 'Chinese (Simplified)',
+  },
+  {
+    value: 'Chinese (Simplified)',
+  },
+  {
+    value: 'French',
+  },
+  {
+    value: 'Gujarati',
+  },
+  {
+    value: 'Haitain Creole',
+  },
+  {
+    value: 'Hebrew',
+  },
+  {
+    value: 'Hungarian',
+  },
+  {
+    value: 'Japanese',
+  },
+  {
+    value: 'Korean',
+  },
+  {
+    value: 'Russian',
+  },
+  {
+    value: 'French',
+  },
+  {
+    value: 'Spanish',
+  },
+  {
+    value: 'Ukranian',
+  },
+  {
+    value: 'Yiddish',
+  },
+];
 
 export default class Home extends React.Component {
   constructor() {
@@ -24,10 +73,9 @@ export default class Home extends React.Component {
   render() {
     return (
       <View style={styles.column}>
-        <View style={{ flex: 1, flexDirection: 'row' }}>
-          <View style={{ width: 50, height: 50, backgroundColor: 'powderblue' }} />
-          <View style={{ width: 50, height: 50, backgroundColor: 'skyblue' }} />
-          <View style={{ width: 50, height: 50, backgroundColor: 'steelblue' }} />
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Image source={rehabLogo} />
+          <Text>{moment().format(' MMMM Do YYYY')}</Text>
         </View>
         <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center' }}>
           <TouchableHighlight onPress={this.checkIn} style={styles.checkInBtn}>
@@ -41,10 +89,19 @@ export default class Home extends React.Component {
             </View>
           </TouchableHighlight>
         </View>
-        <View style={{ flex: 1, flexDirection: 'row' }}>
-          <View style={{ width: 50, height: 50, backgroundColor: 'powderblue' }} />
-          <View style={{ width: 50, height: 50, backgroundColor: 'skyblue' }} />
-          <View style={{ width: 50, height: 50, backgroundColor: 'steelblue' }} />
+        <View
+          style={{
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginBottom: 40,
+            paddingLeft: 40,
+            paddingRight: 40,
+          }}>
+          <Image source={logo} style={{ marginTop: 250 }} />
+          <View style={{ marginTop: 250 }}>
+            <Dropdown style={{ padding: 60 }} label="Select Language" data={languages} />
+          </View>
         </View>
       </View>
     );
