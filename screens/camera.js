@@ -25,7 +25,7 @@ export default class CameraScreen extends React.Component {
   }
   takePicture() {
     let savePic = async () => {
-      let photo = await this.camera.takePictureAsync();
+      let photo = await this.camera.takePictureAsync({ quality: 0.5, base64: true });
       console.log(photo);
     };
     let snap = setInterval(() => {
@@ -52,29 +52,38 @@ export default class CameraScreen extends React.Component {
             backgroundColor: '#8BC34A',
           }}>
           <Text style={{ fontSize: 60, fontWeight: 'bold', color: '#C34A4E' }}>SMILE</Text>
-          <Camera
-            ref={ref => {
-              this.camera = ref;
-            }}
+          <View
             style={{
               flex: 1,
+              width: '50%',
+              height: '50%',
+              borderColor: 'black',
               marginTop: '5%',
               marginBottom: '10%',
-              width: '50%',
-            }}
-            type={this.state.type}>
-            <View
+            }}>
+            <Camera
+              ref={ref => {
+                this.camera = ref;
+              }}
               style={{
                 flex: 1,
-                backgroundColor: 'transparent',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              <Text style={{ fontSize: 100, marginBottom: 10, color: '#C34A4E' }}>
-                {this.state.timer === 0 ? '' : this.state.timer}
-              </Text>
-            </View>
-          </Camera>
+
+                width: '100%',
+              }}
+              type={this.state.type}>
+              <View
+                style={{
+                  flex: 1,
+                  backgroundColor: 'transparent',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                <Text style={{ fontSize: 100, marginBottom: 10, color: '#C34A4E' }}>
+                  {this.state.timer === 0 ? '' : this.state.timer}
+                </Text>
+              </View>
+            </Camera>
+          </View>
         </View>
       );
     }
