@@ -7,7 +7,6 @@ export default class CameraScreen extends React.Component {
     super();
     this.state = {
       hasCameraPermission: null,
-      type: Camera.Constants.Type.front,
       timer: 6,
       picture: '',
       faceDetected: false,
@@ -94,11 +93,11 @@ export default class CameraScreen extends React.Component {
                 flex: 1,
                 borderRadius: 350,
                 borderColor: '#8BC34A',
-                borderWidth: 10,
+                borderWidth: 0,
                 width: '100%',
                 overflow: 'hidden',
               }}
-              type={this.state.type}>
+              type="front">
               <View
                 style={{
                   flex: 1,
