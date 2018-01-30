@@ -8,11 +8,14 @@ export default class CameraScreen extends React.Component {
     this.state = {
       hasCameraPermission: null,
       type: Camera.Constants.Type.front,
-      timer: 10,
+      timer: 6,
       picture: '',
+      faceDetected: false,
+      message: 'Place Your Face In The Circle',
     };
 
     this.takePicture = this.takePicture.bind(this);
+    this.checkforFace = this.checkforFace.bind(this);
   }
 
   async componentWillMount() {
@@ -26,15 +29,34 @@ export default class CameraScreen extends React.Component {
   takePicture() {
     let savePic = async () => {
       let photo = await this.camera.takePictureAsync({ quality: 0.5, base64: true });
-      console.log(photo);
+      this.setState({ photo });
+      console.log('photo taken');
     };
     let snap = setInterval(() => {
-      this.setState({ timer: this.state.timer - 1 });
-      if (this.state.timer === 0) {
-        clearInterval(snap);
-        savePic();
+      if (this.state.faceDetected) {
+        this.setState({ message: 'SMILE' });
+        this.setState({ timer: this.state.timer - 1 });
+        if (this.state.timer === 0) {
+          clearInterval(snap);
+          savePic();
+        }
+      } else {
+        this.setState({ timer: 6 });
+        this.setState({ message: 'Place Your Face In The Circle' });
       }
     }, 1000);
+  }
+
+  checkforFace(faces) {
+    console.log(faces);
+    faces.length === 0 ? this.setState({ faceDetected: false }) : this.setState({ faces: true });
+    if (faces.length === 0) {
+      console.log('noface');
+      this.setState({ faceDetected: false });
+    } else {
+      console.log('face');
+      this.setState({ faceDetected: true });
+    }
   }
   render() {
     const { hasCameraPermission } = this.state;
@@ -51,7 +73,9 @@ export default class CameraScreen extends React.Component {
             justifyContent: 'center',
             backgroundColor: '#8BC34A',
           }}>
-          <Text style={{ fontSize: 60, fontWeight: 'bold', color: '#C34A4E' }}>SMILE</Text>
+          <Text style={{ fontSize: 60, fontWeight: 'bold', color: '#C34A4E' }}>
+            {this.state.message}
+          </Text>
           <View
             style={{
               flex: 1,
@@ -62,13 +86,17 @@ export default class CameraScreen extends React.Component {
               marginBottom: '10%',
             }}>
             <Camera
+              onFacesDetected={face => this.checkforFace(face.faces)}
               ref={ref => {
                 this.camera = ref;
               }}
               style={{
                 flex: 1,
-
+                borderRadius: 350,
+                borderColor: '#8BC34A',
+                borderWidth: 10,
                 width: '100%',
+                overflow: 'hidden',
               }}
               type={this.state.type}>
               <View
@@ -79,7 +107,7 @@ export default class CameraScreen extends React.Component {
                   justifyContent: 'center',
                 }}>
                 <Text style={{ fontSize: 100, marginBottom: 10, color: '#C34A4E' }}>
-                  {this.state.timer === 0 ? '' : this.state.timer}
+                  {this.state.timer === 0 || this.state.timer === 6 ? '' : this.state.timer}
                 </Text>
               </View>
             </Camera>
