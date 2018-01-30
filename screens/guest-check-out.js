@@ -1,17 +1,75 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { Constants, Location, Permissions } from 'expo';
-import { Header } from 'react-native-elements';
+import { Header, FormLabel, FormInput, ButtonGroup } from 'react-native-elements';
+import Numpad from '../components/numpad.js';
+import GuestCheckInfo from '../components/check-in-info.js';
 
 export default class CheckOut extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      number: '',
+      index: 0,
+      numberArray: ['_', '_', '_', '_', '_', '_', '_', '_', '_', '_'],
+    };
+
+    this.deleteNum = this.deleteNum.bind(this);
+    this.clear = this.clear.bind(this);
+    this.numberPress = this.numberPress.bind(this);
+    this.goToConfirmation = this.goToConfirmation.bind(this);
+  }
+  deleteNum() {
+    let temp = this.state.numberArray;
+    temp[this.state.index - 1] = '_';
+    this.setState({ numberArray: temp }, () => {
+      if (this.state.index > 0) this.setState({ index: this.state.index - 1 });
+    });
+  }
+  clear() {
+    this.setState({ numberArray: ['_', '_', '_', '_', '_', '_', '_', '_', '_', '_'] });
+  }
+  numberPress(number) {
+    let temp = this.state.numberArray;
+    temp[this.state.index] = number;
+    this.setState({ numberArray: temp }, () => {
+      if (this.state.index < 10)
+        this.setState({ index: this.state.index + 1 }, () => {
+          if (this.state.index === 10) this.goToConfirmation();
+        });
+    });
+  }
+
+  goToConfirmation() {
+    this.props.navigation.navigate('Confirmation', { message: 'checkOut' });
+  }
+
   render() {
+    let number =
+      this.state.numberArray[0] === '_'
+        ? ''
+        : `(${this.state.numberArray.slice(0, 3).join('')}) ${this.state.numberArray
+            .slice(3, 6)
+            .join('')}-${this.state.numberArray.slice(6, 10).join('')}`;
     return (
-      <View>
+      <View style={styles.container}>
         <Header
-          outerContainerStyles={{ height: 300 }}
+          outerContainerStyles={{ height: 300, borderBottomWidth: 0 }}
           backgroundColor="#e9e9e9"
-          centerComponent={{ text: 'Guest Check-Out', style: { color: '#000', fontSize: 100 } }}
+          centerComponent={{
+            text: 'Guest Check-Out',
+            style: { color: '#7F7F7F', fontSize: 100, fontWeight: '300' },
+          }}
         />
+        <View style={styles.bodyContainer}>
+          <View style={styles.numberContainer}>
+            <Text style={styles.numberText}>{number}</Text>
+            <Numpad clear={this.clear} deleteNum={this.deleteNum} numberPress={this.numberPress} />
+          </View>
+          <View style={styles.numberContainer}>
+            <GuestCheckInfo />
+          </View>
+        </View>
       </View>
     );
   }
@@ -19,9 +77,23 @@ export default class CheckOut extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#e9e9e9',
+  },
+  numberContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+
+    width: '50%',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  bodyContainer: {
+    flex: 1,
+    paddingTop: 100,
+    flexDirection: 'row',
+  },
+  numberText: {
+    color: '#4A8AC3',
+    fontSize: 50,
+    textAlign: 'center',
   },
 });

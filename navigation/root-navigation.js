@@ -7,6 +7,8 @@ import CheckIn from '../screens/guest-check-in-out.js';
 import CheckOut from '../screens/guest-check-out.js';
 import Name from '../screens/name.js';
 import Camera from '../screens/camera.js';
+import checkInType from '../screens/check-in-type.js';
+import Confirmation from '../screens/confirmation.js';
 
 const RootStackNavigator = StackNavigator(
   {
@@ -24,6 +26,12 @@ const RootStackNavigator = StackNavigator(
     },
     Camera: {
       screen: Camera,
+    },
+    checkInType: {
+      screen: checkInType,
+    },
+    Confirmation: {
+      screen: Confirmation,
     },
   },
   {
