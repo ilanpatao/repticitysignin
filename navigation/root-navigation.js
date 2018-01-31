@@ -9,6 +9,8 @@ import Name from '../screens/name.js';
 import Camera from '../screens/camera.js';
 import checkInType from '../screens/check-in-type.js';
 import Confirmation from '../screens/confirmation.js';
+import PersonVisting from '../screens/person-visting.js';
+import Company from '../screens/company.js';
 
 const RootStackNavigator = StackNavigator(
   {
@@ -32,6 +34,12 @@ const RootStackNavigator = StackNavigator(
     },
     Confirmation: {
       screen: Confirmation,
+    },
+    PersonVisting: {
+      screen: PersonVisting,
+    },
+    Company: {
+      screen: Company,
     },
   },
   {

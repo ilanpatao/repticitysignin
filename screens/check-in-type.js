@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import { Header, FormLabel, FormInput, ButtonGroup } from 'react-native-elements';
 
-export default class JustifyContentBasics extends Component {
+export default class CheckInType extends Component {
   constructor() {
     super();
 
-    this.goToCamera = this.goToCamera.bind(this);
+    this.goToType = this.goToType.bind(this);
   }
-  goToCamera(type) {
-    this.props.navigation.navigate('camera');
+  goToType(screen, type) {
+    this.props.navigation.navigate(screen, { type });
   }
   render() {
     return (
@@ -36,17 +36,24 @@ export default class JustifyContentBasics extends Component {
             justifyContent: 'center',
             alignItems: 'center',
           }}>
-          <TouchableHighlight onPress={this.checkIn} style={styles.visitor}>
+          <TouchableHighlight
+            onPress={() => this.goToType('PersonVisting', 'visitor')}
+            style={styles.visitor}>
             <View style={{ width: 150, height: 150, margin: 100 }}>
               <Text style={styles.submitText}>Visitor</Text>
             </View>
           </TouchableHighlight>
-          <TouchableHighlight onPress={this.checkIn} style={styles.provider}>
+          <TouchableHighlight
+            onPress={() => this.goToType('Company', 'provider')}
+            style={styles.provider}>
             <View style={{ width: 150, height: 150, margin: 100 }}>
               <Text style={styles.submitText}>Provider</Text>
             </View>
           </TouchableHighlight>
-          <TouchableHighlight style={{ hieght: 100 }} onPress={this.checkIn} style={styles.vendor}>
+          <TouchableHighlight
+            style={{ hieght: 100 }}
+            onPress={() => this.goToType('Company', 'vender')}
+            style={styles.vendor}>
             <View style={{ width: 150, height: 150, margin: 100 }}>
               <Text style={styles.submitText}>Vendor</Text>
             </View>

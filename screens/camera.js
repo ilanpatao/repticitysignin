@@ -30,6 +30,7 @@ export default class CameraScreen extends React.Component {
       let photo = await this.camera.takePictureAsync({ quality: 0.5, base64: true });
       this.setState({ photo });
       console.log('photo taken');
+      this.props.navigation.navigate('Confirmation', { message: 'checkIn' });
     };
     let snap = setInterval(() => {
       if (this.state.faceDetected) {
@@ -47,7 +48,7 @@ export default class CameraScreen extends React.Component {
   }
 
   checkforFace(faces) {
-    console.log(faces);
+    //console.log(faces);
     faces.length === 0 ? this.setState({ faceDetected: false }) : this.setState({ faces: true });
     if (faces.length === 0) {
       console.log('noface');
